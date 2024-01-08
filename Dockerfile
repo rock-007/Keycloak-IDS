@@ -15,6 +15,11 @@ RUN /opt/keycloak/bin/kc.sh build
 FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
+# setting the admin username
+-e KEYCLOAK_ADMIN=admin
+
+# setting the initial password
+-e KEYCLOAK_ADMIN_PASSWORD=d55
 # change these values to point to a running postgres instance
 ENV KC_DB=postgres
 ENV KC_DB_URL='db.buwvyjjfiyfcgcdvbfke.supabase.co'
