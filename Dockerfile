@@ -15,14 +15,12 @@ RUN /opt/keycloak/bin/kc.sh build
 FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
-
-
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh", \
-            "-e", "KC_DB=postgres", \
-            "-e", "KC_DB_URL='db.buwvyjjfiyfcgcdvbfke.supabase.co'", \
-            "-e", "KC_DB_USERNAME='postgres'", \
-            "-e", "KC_DB_PASSWORD='Skyliner005!"£'", \
-            "-e", "KC_HOSTNAME='keycloak-ids.onrender.com'", \
-            "-e", "KEYCLOAK_ADMIN='admin'", \
-            "-e", "KEYCLOAK_ADMIN_PASSWORD='d55'", \
-]
+# change these values to point to a running postgres instance
+ENV KC_DB=postgres
+ENV KC_DB_URL='db.buwvyjjfiyfcgcdvbfke.supabase.co'
+ENV KC_DB_USERNAME='postgres'
+ENV KC_DB_PASSWORD='Skyliner005!"£'
+ENV KC_HOSTNAME='keycloak-ids.onrender.com'
+ENV KEYCLOAK_ADMIN='admin'
+ENV KEYCLOAK_ADMIN_PASSWORD='d55'
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
