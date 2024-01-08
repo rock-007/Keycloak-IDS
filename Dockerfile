@@ -24,5 +24,5 @@ ENTRYPOINT ["/opt/keycloak/bin/kc.sh", \
             "-e", "KC_DB_PASSWORD='Skyliner005!"£'", \
             "-e", "KC_HOSTNAME='keycloak-ids.onrender.com'", \
             "-e", "KEYCLOAK_ADMIN='admin'", \
-            "-e", "KEYCLOAK_ADMIN_PASSWORD='d55'"
+            "-e", "KEYCLOAK_ADMIN_PASSWORD='d55'", \
 ]
