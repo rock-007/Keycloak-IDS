@@ -20,5 +20,5 @@ ENV KC_DB=postgres
 ENV KC_DB_URL='db.buwvyjjfiyfcgcdvbfke.supabase.co'
 ENV KC_DB_USERNAME='postgres'
 ENV KC_DB_PASSWORD='Skyliner005!"£'
-# ENV KC_HOSTNAME=localhost
+ENV KC_HOSTNAME='keycloak-ids.onrender.com'
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh"]
