@@ -34,4 +34,4 @@ ENV KC_DB_PASSWORD='Skyliner005!"£'
 ENV KC_HOSTNAME='keycloak-ids'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start --optimized --http-port=8080"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh" start --optimized --http-port=8080"]
