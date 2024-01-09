@@ -25,16 +25,16 @@ RUN /opt/keycloak/bin/kc.sh build
 
 FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
-
+EXPOSE 8080
 # change these values to point to a running postgres instance
 ENV KC_DB='postgres'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
 ENV KC_DB_USERNAME='postgres'
 ENV KC_DB_PASSWORD='Skyliner005!"£'
-ENV KC_HOSTNAME='localhost'
+ENV KC_HOSTNAME='127.0.0.1'
 #ENV KC_HOSTNAME='keycloak-ids'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--db-driver=postgres"]
-CMD ["--hostname-port", "8080"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev"]
+# CMD ["--hostname-port", "8080"]
