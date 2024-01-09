@@ -28,7 +28,7 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 # change these values to point to a running postgres instance
 ENV KC_DB='postgres'
-ENV KC_DB_URL='db.buwvyjjfiyfcgcdvbfke.supabase.co'
+ENV KC_DB_URL='jdbc:postgresql://postgres:Skyliner005!"£@db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/pg-db'
 ENV KC_DB_USERNAME='postgres'
 ENV KC_DB_PASSWORD='Skyliner005!"£'
 ENV KC_HOSTNAME='keycloak-ids'
