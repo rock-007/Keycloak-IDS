@@ -36,4 +36,4 @@ ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
 ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--db-driver=postgres"]
-CMD ["-p", "8080:8080"]
+CMD ["--hostname-p", "8080:8080"]
