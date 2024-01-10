@@ -37,7 +37,7 @@ FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 # change these values to point to a running postgres instance
 ENV KC_DB='postgres'
-ENV PROXY_ADDRESS_FORWARDING=true
+ENV PROXY_ADDRESS_FORWARDING='true'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
 ENV KC_DB_USERNAME='postgres'
 ENV KC_DB_PASSWORD='Skyliner005!"£'
