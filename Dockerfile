@@ -25,6 +25,7 @@ RUN /opt/keycloak/bin/kc.sh build
 
 #Create SSL certificate
 RUN touch /server.key.pem
+RUN touch /server.crt.pem
 RUN openssl req -newkey rsa:2048 -nodes \
   -keyout server.key.pem -x509 -days 3650 -out server.crt.pem
 RUN chmod 755 server.key.pem
