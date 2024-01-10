@@ -9,10 +9,10 @@ ENV KC_METRICS_ENABLED=true
 # Enable http
 # ARG KC_HTTP_ENABLED=true
 
-# # Default proxy
+#  Default proxy
 # ARG KC_PROXY=edge
 
-# # Log
+#  Log
 # ARG KC_LOG_CONSOLE_OUTPUT=json
 
 # # Default user
