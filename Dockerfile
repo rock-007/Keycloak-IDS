@@ -29,8 +29,8 @@ RUN touch /server.crt.pem
 RUN openssl req -newkey rsa:2048 -nodes \
   -keyout /server.key.pem -x509 -days 3650 -out /server.crt.pem
 RUN chmod 755 server.key.pem
-COPY /server.crt.pem /etc/x509/https/tls.crt
-COPY /server.key.pem /etc/x509/https/tls.key
+COPY server.crt.pem /etc/x509/https/tls.crt
+COPY server.key.pem /etc/x509/https/tls.key
 EXPOSE 8443
 
 FROM quay.io/keycloak/keycloak:latest
