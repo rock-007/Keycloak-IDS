@@ -23,9 +23,15 @@ WORKDIR /opt/keycloak
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
 RUN /opt/keycloak/bin/kc.sh build
 
+#Create SSL certificate
+RUN openssl req -newkey rsa:2048 -nodes  -keyout server.key.pem -x509 -days 3650 -out server.crt.pem 
+RUN chmod 755 server.key.pem
+COPY server.crt.pem /etc/x509/https/tls.crt
+COPY server.key.pem /etc/x509/https/tls.key
+EXPOSE 8443
+
 FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
-EXPOSE 8443
 # change these values to point to a running postgres instance
 ENV KC_DB='postgres'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
