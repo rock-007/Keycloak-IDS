@@ -42,7 +42,7 @@ ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgr
 ENV KC_DB_USERNAME='postgres'
 ENV KC_DB_PASSWORD='Skyliner005!"£'
 #ENV KC_HOSTNAME='127.0.0.1'
-#ENV KC_HOSTNAME='keycloak-ids'
+ENV KC_HOSTNAME='ids-server.onrender.com'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
