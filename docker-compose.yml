@@ -1,5 +1,13 @@
 
 
+version: '3.8'
+services:
+  keycloak:
+    image: keycloak:server
+    build: ./file/Dockerfile
+    ports:
+      - 8080:8080
+
 
 
 

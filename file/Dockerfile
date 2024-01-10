@@ -25,7 +25,7 @@ RUN /opt/keycloak/bin/kc.sh build
 
 FROM quay.io/keycloak/keycloak:latest
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
-EXPOSE 8080:8080
+EXPOSE 8080
 # change these values to point to a running postgres instance
 ENV KC_DB='postgres'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
