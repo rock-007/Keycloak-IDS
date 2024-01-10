@@ -23,12 +23,7 @@ WORKDIR /opt/keycloak
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
 RUN /opt/keycloak/bin/kc.sh build
 
-# Replace `request` provider with `fixed`
-/subsystem=keycloak-server/spi=hostname:write-attribute (name=default-provider,value=fixed)
-# Set hostname and ports for http and https
-/subsystem=keycloak-server/spi=hostname/provider=fixed:write-attribute (name=properties.hostname,value=<YOUR_DOMAIN_NAME>)
-/subsystem=keycloak-server/spi=hostname/provider=fixed:write-attribute (name=properties.httpsPort,value=443)
-/subsystem=keycloak-server/spi=hostname/provider=fixed:write-attribute (name=properties.httpPort,value=80)
+
 
 #Create SSL certificate
 #RUN openssl req -newkey rsa:2048 -nodes \
