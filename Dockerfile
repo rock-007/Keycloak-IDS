@@ -43,7 +43,7 @@ ENV KC_DB_USERNAME='postgres'
 ENV KC_DB_PASSWORD='Skyliner005!"£'
 #ENV KC_HOSTNAME='127.0.0.1'
 #ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
-ENV KC_HOSTNAME='http://ids-server.onrender.com'
+ENV KC_HOSTNAME='ids-server.onrender.com'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
