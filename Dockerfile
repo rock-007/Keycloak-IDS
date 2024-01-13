@@ -1,5 +1,9 @@
 FROM quay.io/keycloak/keycloak:latest as builder
+
+
 # Install OpenJDK-8
+RUN apk add --update linux-headers;
+
 RUN sudo apt update && \
     sudo apt install -y openjdk-8-jdk && \
     sudo apt install -y ant && \
