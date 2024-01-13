@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:latest as builder
+FROM quay.io/keycloak/keycloak:23.0.2 as builder
 
 
 
