@@ -1,5 +1,9 @@
 FROM quay.io/keycloak/keycloak:latest as builder
-
+# Install OpenJDK-8
+RUN apt update && \
+    apt install -y openjdk-8-jdk && \
+    apt install -y ant && \
+    apt clean;
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=false
