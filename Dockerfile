@@ -58,8 +58,8 @@ CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--htt
 FROM nginx
 
 # Expose the port that Nginx listens on
-VOLUME /usr/share/nginx/html
-VOLUME /etc/nginx/nginx.conf
+#VOLUME /usr/share/nginx/html
+#VOLUME /etc/nginx/nginx.conf
 
 # Copy the Nginx configuration file
 #COPY content /usr/share/nginx/html
