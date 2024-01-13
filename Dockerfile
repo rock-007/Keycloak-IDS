@@ -34,8 +34,7 @@ COPY  server.crt.pem /etc/x509/https/tls.crt
 COPY  server.key.pem /etc/x509/https/tls.key
 EXPOSE 8443
 
-FROM quay.io/keycloak/keycloak:latest
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
+ 
 # change these values to point to a running postgres instance
 ENV KC_PROXY='passthrough'
 ENV KC_DB='postgres'
@@ -60,7 +59,7 @@ FROM nginx
 # Copy the Nginx configuration file
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy the Keycloak service from the previous stage
-COPY --from=keycloak /opt/keycloak /opt/keycloak
+COPY --from=builder /opt/keycloak /opt/keycloak
 # Expose the port that Nginx listens on
 EXPOSE 8080
 # Run both services
