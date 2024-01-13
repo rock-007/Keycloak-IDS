@@ -1,18 +1,9 @@
 FROM quay.io/keycloak/keycloak:latest as builder
 
-RUN cd /tmp \
-&& apt-get update \
-&& apt-get install -y curl apt-utils wget unzip\
-&& rm -rf /var/lib/apt/lists/*
-# Install OpenJDK-8
-RUN apk add --update linux-headers;
+RUN apk add --no-cache curl wget unzip
+RUN apk add --update openjdk8
+RUN apk add --update ant
 
-RUN sudo apt update && \
-    sudo apt install -y openjdk-8-jdk && \
-    sudo apt install -y ant && \
-    sudo apt clean;
-ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-RUN export JAVA_HOME
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=false
