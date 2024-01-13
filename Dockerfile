@@ -51,7 +51,7 @@ ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
 #ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true"]
 # CMD ["--hostname-port", "8080"]
-CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--http-port=8443"]
+CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--http-port=8080"]
 
 
 # Use Nginx as the base image
