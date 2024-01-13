@@ -21,16 +21,17 @@ ENV KC_METRICS_ENABLED=false
 # ARG KEYCLOAK_ADMIN_PASSWORD=change_me
 WORKDIR /opt/keycloak
 # Install OpenJDK-8
-RUN apt-get update && \
-    apt-get install -y openjdk-8-jdk && \
-    apt-get install -y ant && \
-    apt-get clean;
+RUN apt update && \
+    apt install -y openjdk-8-jdk && \
+    apt install -y ant && \
+    apt clean;
     
 # Fix certificate issues
-RUN apt-get update && \
-    apt-get install ca-certificates-java && \
-    apt-get clean && \
+RUN apt update && \
+    apt install -y ca-certificates-java && \
+    apt clean && \
     update-ca-certificates -f;
+
 
 # Setup JAVA_HOME -- useful for docker commandline
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
