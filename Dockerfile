@@ -1,7 +1,6 @@
 FROM quay.io/keycloak/keycloak:latest as builder
 
-RUN apk add --update openjdk8
-RUN apk add --update ant
+
 
 
 # Enable health and metrics support
@@ -23,6 +22,8 @@ ENV KC_METRICS_ENABLED=false
 # ARG KEYCLOAK_ADMIN=admin
 # ARG KEYCLOAK_ADMIN_PASSWORD=change_me
 WORKDIR /opt/keycloak
+RUN sudo apk add --update openjdk8
+RUN sudo apk add --update ant
 # # Install OpenJDK-8
 # RUN apt update && \
 #     apt install -y openjdk-8-jdk && \
