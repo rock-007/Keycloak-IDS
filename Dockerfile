@@ -1,6 +1,5 @@
 FROM quay.io/keycloak/keycloak:latest as builder
 
-RUN apk add --no-cache curl wget unzip
 RUN apk add --update openjdk8
 RUN apk add --update ant
 
