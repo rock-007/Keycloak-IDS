@@ -4,6 +4,8 @@ RUN apt update && \
     apt install -y openjdk-8-jdk && \
     apt install -y ant && \
     apt clean;
+ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
+RUN export JAVA_HOME
 
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=false
