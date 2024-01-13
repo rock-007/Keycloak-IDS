@@ -56,6 +56,11 @@ CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--htt
 
 # Use Nginx as the base image
 FROM nginx
+
+# Expose the port that Nginx listens on
+VOLUME /usr/share/nginx/html
+VOLUME /etc/nginx/nginx.conf
+
 # Copy the Nginx configuration file
 #COPY content /usr/share/nginx/html
 COPY --chown=nginx:nginx nginx.conf /etc/nginx/nginx.conf
@@ -63,10 +68,7 @@ COPY --chown=nginx:nginx nginx.conf /etc/nginx/nginx.conf
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 
-# Expose the port that Nginx listens on
-VOLUME /usr/share/nginx/html
-VOLUME /etc/nginx
-VOLUME /etc/nginx/nginx.conf
+
 
 EXPOSE 8080
 # Run both services
