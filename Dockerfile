@@ -58,7 +58,7 @@ CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--htt
 FROM nginx
 # Copy the Nginx configuration file
 #COPY content /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --chown=nginx:nginx nginx.conf /etc/nginx/nginx.conf
 # Copy the Keycloak service from the previous stage
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 # Expose the port that Nginx listens on
