@@ -57,10 +57,13 @@ CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--htt
 # Use Nginx as the base image
 FROM nginx
 # Copy the Nginx configuration file
+COPY content /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 # Copy the Keycloak service from the previous stage
 COPY --from=builder /opt/keycloak/ /opt/keycloak/
 # Expose the port that Nginx listens on
+VOLUME /usr/share/nginx/html
+VOLUME /etc/nginx
 EXPOSE 8080
 # Run both services
 ENTRYPOINT ["/bin/sh", "-c", "/opt/keycloak/bin/kc.sh start-dev --hostname-strict-https=true & nginx -g 'daemon off;'"]
