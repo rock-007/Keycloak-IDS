@@ -41,6 +41,7 @@ ENV KC_DB='postgres'
 ENV PROXY_ADDRESS_FORWARDING='true'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
 ENV KC_DB_USERNAME='postgres'
+ENV KC_HOSTNAME_PORT: 8443
 ENV KC_DB_PASSWORD='Skyliner005!"£'
 #ENV KC_HOSTNAME='127.0.0.1'
 #ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
