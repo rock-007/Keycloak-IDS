@@ -22,8 +22,8 @@ ENV KC_METRICS_ENABLED=false
 # ARG KEYCLOAK_ADMIN=admin
 # ARG KEYCLOAK_ADMIN_PASSWORD=change_me
 WORKDIR /opt/keycloak
-RUN sudo apk add --update openjdk8
-RUN sudo apk add --update ant
+# RUN sudo apk add --update openjdk8
+# RUN sudo apk add --update ant
 # # Install OpenJDK-8
 # RUN apt update && \
 #     apt install -y openjdk-8-jdk && \
@@ -76,6 +76,8 @@ CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--htt
 
 # Use Nginx as the base image
 FROM nginx
+RUN apt-get update && apt-get install -y openjdk-8-jdk ant
+
 
 # Expose the port that Nginx listens on
 #VOLUME /usr/share/nginx/html
