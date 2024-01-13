@@ -7,39 +7,8 @@ FROM quay.io/keycloak/keycloak:latest as builder
 ENV KC_HEALTH_ENABLED=false
 ENV KC_METRICS_ENABLED=false
 
-# Configure a database vendor
-# ENV KC_DB=postgres
-# Enable http
-# ARG KC_HTTP_ENABLED=true
-
-#  Default proxy
-# ARG KC_PROXY=edge
-
-#  Log
-# ARG KC_LOG_CONSOLE_OUTPUT=json
-
-# # Default user
-# ARG KEYCLOAK_ADMIN=admin
-# ARG KEYCLOAK_ADMIN_PASSWORD=change_me
 WORKDIR /opt/keycloak
-# RUN sudo apk add --update openjdk8
-# RUN sudo apk add --update ant
-# # Install OpenJDK-8
-# RUN apt update && \
-#     apt install -y openjdk-8-jdk && \
-#     apt install -y ant && \
-#     apt clean;
-    
-# # Fix certificate issues
-# RUN apt update && \
-#     apt install -y ca-certificates-java && \
-#     apt clean && \
-#     update-ca-certificates -f;
 
-
-# Setup JAVA_HOME -- useful for docker commandline
-# ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
-# RUN export JAVA_HOME
 # for demonstration purposes only, please make sure to use proper certificates in production instead
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
 RUN /opt/keycloak/bin/kc.sh build
@@ -61,9 +30,9 @@ ENV KC_DB='postgres'
 ENV PROXY_ADDRESS_FORWARDING='true'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
 ENV KC_DB_USERNAME='postgres'
-ENV KC_HOSTNAME_PORT: 8443
+ENV KC_HOSTNAME_PORT: 8080
 ENV KC_DB_PASSWORD='Skyliner005!"£'
-ENV KC_HOSTNAME='localhost'
+ENV KC_HOSTNAME='ids-service.onrender.com'
 #ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
 #ENV KC_HOSTNAME='ids-server.onrender.com'
 ENV KEYCLOAK_ADMIN='admin'
