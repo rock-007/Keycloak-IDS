@@ -48,5 +48,5 @@ ENV KC_HOSTNAME='ids-server.onrender.com'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict=false"]
+ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true"]
 # CMD ["--hostname-port", "8080"]
