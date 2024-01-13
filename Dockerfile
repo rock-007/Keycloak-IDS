@@ -1,6 +1,9 @@
 FROM quay.io/keycloak/keycloak:latest as builder
 
-RUN yum install -y wget
+RUN cd /tmp \
+&& apt-get update \
+&& apt-get install -y curl apt-utils wget unzip\
+&& rm -rf /var/lib/apt/lists/*
 # Install OpenJDK-8
 RUN apk add --update linux-headers;
 
