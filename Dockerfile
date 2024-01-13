@@ -52,7 +52,7 @@ RUN /opt/keycloak/bin/kc.sh build
 #RUN chmod 755 /server.key.pem
 COPY  server.crt.pem /etc/x509/https/tls.crt
 COPY  server.key.pem /etc/x509/https/tls.key
-EXPOSE 8443
+EXPOSE 8080
 
  
 # change these values to point to a running postgres instance
