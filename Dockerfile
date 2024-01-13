@@ -76,7 +76,6 @@ CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true","--htt
 
 # Use Nginx as the base image
 FROM nginx
-RUN apt-get update && apt-get install -y openjdk-8-jdk ant
 
 
 # Expose the port that Nginx listens on
@@ -94,6 +93,6 @@ COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 EXPOSE 8080
 # Run both services
-ENTRYPOINT ["/bin/sh", "-c", "/opt/keycloak/bin/kc.sh start-dev --hostname-strict-https=true & nginx -g 'daemon off;'"]
+ENTRYPOINT ["/bin/sh", "-c", "/opt/keycloak/bin/kc.sh start-dev --proxy=edge --auto-build  & nginx -g 'daemon off;'"]
 
 
