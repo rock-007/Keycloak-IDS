@@ -1,5 +1,6 @@
 FROM quay.io/keycloak/keycloak:latest as builder
 
+
 # Enable health and metrics support
 ENV KC_HEALTH_ENABLED=false
 ENV KC_METRICS_ENABLED=false
@@ -49,5 +50,20 @@ ENV KC_HOSTNAME='ids-server.onrender.com'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 # ENTRYPOINT ["/opt/keycloak/bin/kc.sh", "start","--http-port=8080", "--db-driver=postgres"] for production
-ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true"]
+#ENTRYPOINT ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true"]
 # CMD ["--hostname-port", "8080"]
+CMD ["/opt/keycloak/bin/kc.sh","start-dev","--hostname-strict-https=true"]
+
+
+# Use Nginx as the base image
+FROM nginx
+# Copy the Nginx configuration file
+COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Copy the Keycloak service from the previous stage
+COPY --from=keycloak /opt/keycloak /opt/keycloak
+# Expose the port that Nginx listens on
+EXPOSE 8080
+# Run both services
+ENTRYPOINT ["/bin/sh", "-c", "/opt/keycloak/bin/kc.sh start-dev --hostname-strict-https=true & nginx -g 'daemon off;'"]
+
+
