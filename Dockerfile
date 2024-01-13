@@ -1,9 +1,9 @@
 FROM quay.io/keycloak/keycloak:latest as builder
 # Install OpenJDK-8
-RUN apt update && \
-    apt install -y openjdk-8-jdk && \
-    apt install -y ant && \
-    apt clean;
+RUN sudo apt update && \
+    sudo apt install -y openjdk-8-jdk && \
+    sudo apt install -y ant && \
+    sudo apt clean;
 ENV JAVA_HOME /usr/lib/jvm/java-8-openjdk-amd64/
 RUN export JAVA_HOME
 
