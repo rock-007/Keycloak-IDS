@@ -3,7 +3,7 @@ FROM bitnami/keycloak:latest
 
 # Set environment variables for database connection
 ENV externalDatabase.host="jdbc:postgresql://18.135.96.195"
-
+ENV KEYCLOAK_DATABASE_HOST="18.135.96.195"
 ENV externalDatabase.port=5432
 ENV externalDatabase.database=postgres
 ENV externalDatabase.user=postgres
