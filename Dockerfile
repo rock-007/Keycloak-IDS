@@ -40,7 +40,7 @@ ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgr
 ENV KC_DB_USERNAME='postgres'
 ENV KC_HOSTNAME_PORT: 8080
 ENV KC_DB_PASSWORD='Skyliner005!"£'
-ENV KC_HOSTNAME='ids-service.onrender.com'
+#ENV KC_HOSTNAME='ids-service.onrender.com'
 ENV KC_HOSTNAME_URL = 'http://localhost:8080'
 #ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
 #ENV KC_HOSTNAME='ids-server.onrender.com'
