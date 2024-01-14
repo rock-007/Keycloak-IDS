@@ -64,7 +64,7 @@ FROM nginx
 #COPY content /usr/share/nginx/html
 COPY --chown=nginx:nginx nginx.conf /etc/nginx/nginx.conf
 # Copy the Keycloak service from the previous stage
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
+COPY --from=builder opt/keycloak/ /opt/keycloak/
 
 
 
