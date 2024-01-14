@@ -85,6 +85,6 @@ ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 
 EXPOSE 8080
 # Run both services
-ENTRYPOINT ["/bin/sh", "-c", "/opt/keycloak/bin/kc.sh start-dev --proxy=edge --auto-build  & nginx -g 'daemon off;'"]
+ENTRYPOINT ["/bin/sh", "-c", "/opt/keycloak/bin/kc.sh start-dev --proxy=edge --auto-build --hostname-strict=false hostname-strict-https=false  & nginx -g 'daemon off;'"]
 
 
