@@ -19,8 +19,8 @@ WORKDIR /opt/keycloak
 
 # for demonstration purposes only, please make sure to use proper certificates in production instead
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
-RUN /opt/keycloak/bin/kc.sh build
-
+RUN /opt/keycloak/bin/kc.sh build --db=postgres
+#RUN ./bin/kc.sh build --db=postgres
 
 
 #Create SSL certificate
@@ -65,7 +65,19 @@ FROM nginx
 COPY --chown=nginx:nginx nginx.conf /etc/nginx/nginx.conf
 # Copy the Keycloak service from the previous stage
 COPY --from=builder opt/keycloak/ /opt/keycloak/
-
+ENV KC_PROXY='edge'
+ENV KC_DB='postgres'
+ENV PROXY_ADDRESS_FORWARDING='true'
+ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
+ENV KC_DB_USERNAME='postgres'
+ENV KC_HOSTNAME_PORT: 8443
+ENV KC_DB_PASSWORD='Skyliner005!"£'
+ENV KC_HOSTNAME='ids-service.onrender.com'
+ENV KC_HOSTNAME_URL = 'https://localhost:8443'
+#ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
+#ENV KC_HOSTNAME='ids-server.onrender.com'
+ENV KEYCLOAK_ADMIN='admin'
+ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 
 
 
