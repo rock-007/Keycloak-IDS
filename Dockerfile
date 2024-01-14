@@ -1,5 +1,12 @@
 FROM quay.io/keycloak/keycloak:23.0.2 as builder
-RUN dnf update -y && dnf install -y glibc-langpack-en gzip hostname java-11-openjdk-headless openssl tar which && dnf clean all
+RUN dnf update -y && \
+    dnf install -y curl wget unzip && \
+    dnf clean all && \
+    dnf install -y java-1.8.0-openjdk-devel && \
+    dnf install -y ant && \
+    dnf clean all
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/
+RUN export JAVA_HOME
 
 
 
