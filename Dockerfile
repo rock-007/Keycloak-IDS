@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:20.0.0 as builder
+FROM bitnami/keycloak:22-debian-11 as builder
 # RUN dnf update -y && \
 #     dnf install -y curl wget unzip && \
 #     dnf clean all && \
