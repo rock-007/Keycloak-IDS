@@ -2,13 +2,12 @@
 FROM bitnami/keycloak:latest
 
 # Set environment variables for database connection
- {{- if (not .Values.externalDatabase.existingSecret) }}
 ENV externalDatabase.host=jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co
 ENV externalDatabase.port=5432
 ENV externalDatabase.database=postgres
 ENV externalDatabase.user=postgres
 ENV externalDatabase.password=Skyliner005!\"£
- {{- end }}
+
 # Expose port 8080 for Keycloak
 EXPOSE 8080
 
