@@ -29,7 +29,7 @@ RUN /opt/keycloak/bin/kc.sh build
 #RUN chmod 755 /server.key.pem
 COPY  server.crt.pem /etc/x509/https/tls.crt
 COPY  server.key.pem /etc/x509/https/tls.key
-EXPOSE 8080
+EXPOSE 8443
 
  
 # change these values to point to a running postgres instance
@@ -38,7 +38,7 @@ ENV KC_DB='postgres'
 ENV PROXY_ADDRESS_FORWARDING='true'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
 ENV KC_DB_USERNAME='postgres'
-ENV KC_HOSTNAME_PORT: 8080
+ENV KC_HOSTNAME_PORT: 8443
 ENV KC_DB_PASSWORD='Skyliner005!"£'
 ENV KC_HOSTNAME='ids-service.onrender.com'
 ENV KC_HOSTNAME_URL = 'https://localhost:8443'
