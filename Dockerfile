@@ -33,7 +33,7 @@ EXPOSE 8080
 
  
 # change these values to point to a running postgres instance
-ENV KC_PROXY='passthrough'
+ENV KC_PROXY='edge'
 ENV KC_DB='postgres'
 ENV PROXY_ADDRESS_FORWARDING='true'
 ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
