@@ -41,6 +41,7 @@ ENV KC_DB_USERNAME='postgres'
 ENV KC_HOSTNAME_PORT: 8080
 ENV KC_DB_PASSWORD='Skyliner005!"£'
 ENV KC_HOSTNAME='ids-service.onrender.com'
+ENV KC_HOSTNAME_URL = 'https://localhost:8443'
 #ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
 #ENV KC_HOSTNAME='ids-server.onrender.com'
 ENV KEYCLOAK_ADMIN='admin'
