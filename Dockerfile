@@ -1,5 +1,5 @@
 FROM quay.io/keycloak/keycloak:23.0.2 as builder
-RUN microdnf update -y && microdnf install -y glibc-langpack-en gzip hostname java-11-openjdk-headless openssl tar which && microdnf clean all
+RUN dnf update -y && dnf install -y glibc-langpack-en gzip hostname java-11-openjdk-headless openssl tar which && dnf clean all
 
 
 
