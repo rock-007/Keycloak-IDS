@@ -1,12 +1,12 @@
 FROM quay.io/keycloak/keycloak:20.0.0 as builder
-RUN dnf update -y && \
-    dnf install -y curl wget unzip && \
-    dnf clean all && \
-    dnf install -y java-1.8.0-openjdk-devel && \
-    dnf install -y ant && \
-    dnf clean all
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/
-RUN export JAVA_HOME
+# RUN dnf update -y && \
+#     dnf install -y curl wget unzip && \
+#     dnf clean all && \
+#     dnf install -y java-1.8.0-openjdk-devel && \
+#     dnf install -y ant && \
+#     dnf clean all
+# ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk/
+# RUN export JAVA_HOME
 
 
 
