@@ -2,9 +2,9 @@
 FROM bitnami/keycloak:latest
 
 # Set environment variables for database connection
-ENV KEYCLOAK_DATABASE_HOST=jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co
+ENV KEYCLOAK_DATABASE_HOST=jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres
 ENV KEYCLOAK_DATABASE_PORT=5432
-ENV KEYCLOAK_DATABASE_NAME=postgres
+#ENV KEYCLOAK_DATABASE_NAME=postgres
 ENV KEYCLOAK_DATABASE_USER=postgres
 ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
 
