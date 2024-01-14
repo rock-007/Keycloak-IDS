@@ -1,4 +1,4 @@
-FROM quay.io/keycloak/keycloak:23.0.2 as builder
+FROM quay.io/keycloak/keycloak:20.0.0 as builder
 RUN dnf update -y && \
     dnf install -y curl wget unzip && \
     dnf clean all && \
