@@ -40,7 +40,7 @@ FROM nginx:latest AS nginx
 
 # Copy the nginx configuration file from the previous stage
 # COPY --from=builder --chown=nginx:nginx opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default.conf
-
+COPY nginx.conf /etc/nginx/nginx.conf
 # Copy the nginx configuration file
 #COPY nginx.conf /etc/nginx/nginx.conf
 
@@ -64,7 +64,7 @@ CMD ["java", "-jar", "/opt/my-app.jar"]
 
 COPY --from=builder opt/keycloak/ /opt/keycloak/
 COPY --from=nginx opt/nginx/ /opt/nginx/
-COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=nginx etc/nginx/ /etc/nginx/
 
 
 
