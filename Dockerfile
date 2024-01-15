@@ -55,8 +55,9 @@ EXPOSE 80
 #CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
 # CMD ["/opt/bitnami/scripts/keycloak/run.s --proxy=edge --auto-build --hostname-strict=false --http-port=8080  & nginx -g 'daemon off;'"]
 # CMD ["/bin/bash", "-c", "/opt/bitnami/scripts/keycloak/run.sh --proxy=edge --auto-build --hostname-strict=false --http-port=8080 && nginx -g 'daemon off;'"]
-ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
-CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
+#ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
+#CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
+ENTRYPOINT ["/bin/sh", "-c", "/opt/bitnami/scripts/keycloak/run.sh start-dev --proxy=edge --auto-build --hostname-strict=false --hostname-strict-https=false --http-port=8080  & nginx -g 'daemon off;'"]
 # FROM bitnami/keycloak:22-debian-11 as builder
 # # RUN dnf update -y && \
 # #     dnf install -y curl wget unzip && \
