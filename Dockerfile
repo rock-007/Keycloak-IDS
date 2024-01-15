@@ -1,34 +1,60 @@
-# Use bitnami/keycloak as base image
-FROM bitnami/keycloak:latest as builder
+FROM quay.io/keycloak/keycloak:latest as builder
 
-# Set environment variables for database connection
-ENV externalDatabase.host="jdbc:postgresql://18.135.96.195"
-ENV KEYCLOAK_DATABASE_HOST="18.135.96.195"
-ENV externalDatabase.port=5432
-ENV externalDatabase.database=postgres
-ENV externalDatabase.user=postgres
-ENV externalDatabase.password=Skyliner005!\"£
-ENV HOSTNAME_STRICT=false
-ENV KEYCLOAK_DATABASE_PORT=5432
-ENV KEYCLOAK_DATABASE_NAME=postgres
-ENV KEYCLOAK_DATABASE_USER=postgres
-ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
-      # Should create administrator user on boot?
-ENV KEYCLOAK_CREATE_ADMIN_USER=true
-      # Administrator default user
-ENV KEYCLOAK_ADMIN_USER=admin
-      # Administrator default password
-ENV KEYCLOAK_ADMIN_PASSWORD=admin
+# Enable health and metrics support
+ENV KC_HEALTH_ENABLED=true
+ENV KC_METRICS_ENABLED=true
 
+# Configure a database vendor
+ENV KC_DB=postgres
 
+WORKDIR /opt/keycloak
+# for demonstration purposes only, please make sure to use proper certificates in production instead
+RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
+RUN /opt/keycloak/bin/kc.sh build
 
-
-
-
+FROM quay.io/keycloak/keycloak:latest
+COPY --from=builder /opt/keycloak/ /opt/keycloak/
+# change these values to point to a running postgres instance
+ENV KC_PROXY='edge'
+ENV KC_DB='postgres'
+ENV PROXY_ADDRESS_FORWARDING='true'
+ENV KC_DB_URL='jdbc:postgresql://db.buwvyjjfiyfcgcdvbfke.supabase.co:5432/postgres'
+ENV KC_DB_USERNAME='postgres'
+ENV KC_HOSTNAME_PORT: 8080
+ENV KC_DB_PASSWORD='Skyliner005!"£'
+#ENV KC_HOSTNAME='ids-service.onrender.com'
+ENV KC_HOSTNAME_URL = 'http://localhost:8080'
+#ENV KC_HOSTNAME='ids-server.onrender.com'
+ENV KEYCLOAK_ADMIN='admin'
+ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 
 
 # Expose port 8080 for Keycloak
 EXPOSE 8080
+
+# # Use bitnami/keycloak as base image
+# FROM bitnami/keycloak:latest as builder
+
+# # Set environment variables for database connection
+# ENV externalDatabase.host="jdbc:postgresql://18.135.96.195"
+# ENV KEYCLOAK_DATABASE_HOST="18.135.96.195"
+# ENV externalDatabase.port=5432
+# ENV externalDatabase.database=postgres
+# ENV externalDatabase.user=postgres
+# ENV externalDatabase.password=Skyliner005!\"£
+# ENV HOSTNAME_STRICT=false
+# ENV KEYCLOAK_DATABASE_PORT=5432
+# ENV KEYCLOAK_DATABASE_NAME=postgres
+# ENV KEYCLOAK_DATABASE_USER=postgres
+# ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
+#       # Should create administrator user on boot?
+# ENV KEYCLOAK_CREATE_ADMIN_USER=true
+#       # Administrator default user
+# ENV KEYCLOAK_ADMIN_USER=admin
+#       # Administrator default password
+# ENV KEYCLOAK_ADMIN_PASSWORD=admin
+
+
 
 
 # Use nginx image as the second stage
@@ -41,7 +67,8 @@ FROM nginx:latest AS nginx
 #COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the keycloak files from the previous stage
-COPY --from=builder /opt/bitnami/keycloak /opt/bitnami/keycloak
+#COPY --from=builder /opt/bitnami/keycloak /opt/bitnami/keycloak
+COPY --from=builder opt/keycloak/ /opt/keycloak/
 
 
 # Copy the start script and make it executable
@@ -109,7 +136,6 @@ ENTRYPOINT ["/start.sh"]
 # ENV KC_DB_PASSWORD='Skyliner005!"£'
 # #ENV KC_HOSTNAME='ids-service.onrender.com'
 # ENV KC_HOSTNAME_URL = 'http://localhost:8080'
-# #ENV KEYCLOAK_CONTENT_SECURITY_POLICY= "frame-src 'self'; frame-ancestors 'self' http://localhost:3000; object-src 'none'
 # #ENV KC_HOSTNAME='ids-server.onrender.com'
 # ENV KEYCLOAK_ADMIN='admin'
 # ENV KEYCLOAK_ADMIN_PASSWORD='d55'
