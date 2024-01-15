@@ -17,6 +17,27 @@ ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
 EXPOSE 8080
 
 
+# Use nginx image as the second stage
+FROM nginx:latest AS nginx
+
+# Copy the nginx configuration file from the previous stage
+COPY --from=keycloak /opt/bitnami/nginx/conf/server_blocks/keycloak.conf /etc/nginx/conf.d/default.conf
+
+# Copy the nginx configuration file
+COPY nginx.conf /etc/nginx/nginx.conf
+
+# Copy the keycloak files from the previous stage
+COPY --from=keycloak /opt/bitnami/keycloak /opt/bitnami/keycloak
+
+# Expose port 80 for nginx
+EXPOSE 80
+
+
+
+
+CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
+
+
 # FROM bitnami/keycloak:22-debian-11 as builder
 # # RUN dnf update -y && \
 # #     dnf install -y curl wget unzip && \
