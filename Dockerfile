@@ -37,7 +37,7 @@ EXPOSE 8080
 
 # Use nginx image as the second stage
 FROM nginx:latest AS nginx
-
+COPY --from=builder opt/keycloak/ /opt/keycloak/
 # Copy the nginx configuration file from the previous stage
 # COPY --from=builder --chown=nginx:nginx opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/nginx.conf
@@ -62,9 +62,10 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 # Define the default command for the container
 CMD ["java", "-jar", "/opt/my-app.jar"]
 
-COPY --from=builder opt/keycloak/ /opt/keycloak/
+
 #COPY --from=nginx opt/nginx/ /opt/nginx/
-COPY --from=nginx etc/nginx/ /etc/nginx/
+#COPY --from=nginx etc/nginx/ /etc/nginx/
+COPY --from=nginx-stage /usr/share/nginx/html /usr/share/nginx/html
 
 
 
