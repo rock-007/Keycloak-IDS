@@ -53,8 +53,7 @@ RUN chmod +x /start.sh
 EXPOSE 80
 
 
-# Expose port 80 for nginx
-EXPOSE 80
+
 
 # Use the start script as the entrypoint or the command
 ENTRYPOINT ["/start.sh"]
