@@ -63,7 +63,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 CMD ["java", "-jar", "/opt/my-app.jar"]
 
 COPY --from=builder opt/keycloak/ /opt/keycloak/
-COPY --from=nginx opt/nginx/ /opt/nginx/
+#COPY --from=nginx opt/nginx/ /opt/nginx/
 COPY --from=nginx etc/nginx/ /etc/nginx/
 
 
