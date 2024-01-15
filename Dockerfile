@@ -43,10 +43,21 @@ FROM nginx:latest AS nginx
 # Copy the keycloak files from the previous stage
 COPY --from=builder /opt/bitnami/keycloak /opt/bitnami/keycloak
 
+
+# Copy the start script and make it executable
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+
 # Expose port 80 for nginx
 EXPOSE 80
 
 
+# Expose port 80 for nginx
+EXPOSE 80
+
+# Use the start script as the entrypoint or the command
+ENTRYPOINT ["/start.sh"]
 
 
 #CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
@@ -54,7 +65,7 @@ EXPOSE 80
 # CMD ["/bin/bash", "-c", "/opt/bitnami/scripts/keycloak/run.sh --proxy=edge --auto-build --hostname-strict=false --http-port=8080 && nginx -g 'daemon off;'"]
 #ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
 #CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
-ENTRYPOINT ["/bin/sh", "-c", "/opt/bitnami/scripts/keycloak/run.sh start-dev --proxy=edge --auto-build --hostname-strict=false --hostname-strict-https=false --http-port=8080  & nginx -g 'daemon off;'"]
+#ENTRYPOINT ["/bin/sh", "-c", "/opt/bitnami/scripts/keycloak/run.sh start-dev --proxy=edge --auto-build --hostname-strict=false --hostname-strict-https=false --http-port=8080  & nginx -g 'daemon off;'"]
 # FROM bitnami/keycloak:22-debian-11 as builder
 # # RUN dnf update -y && \
 # #     dnf install -y curl wget unzip && \
