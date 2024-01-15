@@ -27,18 +27,7 @@ ENV KEYCLOAK_MANAGEMENT_PASSWORD=manager
 # Add TLS files into the container keycloak certificates directory
 WORKDIR /opt/bitnami/keycloak/certs/
 
-# pskey.keystore password is 123456
-ADD ./pskey.keystore .
 
-# hrms.truststore password is 234567
-ADD ./hrms.truststore .
-
-# truststore.jks password is 123456
-ADD ./truststore.jks .
-
-# for demonstration purposes only, please make sure to use proper certificates in production instead
-# Add temporary validity new keys pair in pskey.keystore
-#RUN keytool -genkeypair -storepass 123456 -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore serve
 
 
 
@@ -67,6 +56,7 @@ EXPOSE 80
 #CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
 # CMD ["/opt/bitnami/scripts/keycloak/run.s --proxy=edge --auto-build --hostname-strict=false --http-port=8080  & nginx -g 'daemon off;'"]
 # CMD ["/bin/bash", "-c", "/opt/bitnami/scripts/keycloak/run.sh --proxy=edge --auto-build --hostname-strict=false --http-port=8080 && nginx -g 'daemon off;'"]
+ENTRYPOINT [ "/opt/bitnami/scripts/keycloak/entrypoint.sh" ]
 CMD nginx -g 'daemon off;' && /opt/bitnami/scripts/keycloak/run.sh --proxy=edge --hostname-strict=false
 # FROM bitnami/keycloak:22-debian-11 as builder
 # # RUN dnf update -y && \
