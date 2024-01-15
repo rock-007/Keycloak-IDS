@@ -27,7 +27,7 @@ COPY --from=builder /opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default
 #COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the keycloak files from the previous stage
-COPY --from=base /opt/bitnami/keycloak /opt/bitnami/keycloak
+COPY --from=base --chown=nginx:nginx /opt/bitnami/keycloak /opt/bitnami/keycloak
 
 # Expose port 80 for nginx
 EXPOSE 80
