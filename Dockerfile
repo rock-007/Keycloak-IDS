@@ -19,10 +19,7 @@ ENV KEYCLOAK_CREATE_ADMIN_USER=true
 ENV KEYCLOAK_ADMIN_USER=admin
       # Administrator default password
 ENV KEYCLOAK_ADMIN_PASSWORD=admin
-      # WildFly default management user
-ENV KEYCLOAK_MANAGEMENT_USER=manager
-      # WildFly default management password
-ENV KEYCLOAK_MANAGEMENT_PASSWORD=manager
+
 
 
 
