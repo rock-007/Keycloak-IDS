@@ -1,3 +1,4 @@
+# Use quay.io/keycloak/keycloak:latest as the base image
 FROM quay.io/keycloak/keycloak:latest as builder
 
 # Enable health and metrics support
@@ -12,8 +13,10 @@ WORKDIR /opt/keycloak
 RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore conf/server.keystore
 RUN /opt/keycloak/bin/kc.sh build
 
-FROM quay.io/keycloak/keycloak:latest
-COPY --from=builder /opt/keycloak/ /opt/keycloak/
+# Copy the keycloak files to the image
+COPY --from=keycloak /opt/keycloak/ /opt/keycloak/
+
+# Set the environment variables for keycloak
 # change these values to point to a running postgres instance
 ENV KC_PROXY='edge'
 ENV KC_DB='postgres'
@@ -28,33 +31,8 @@ ENV KC_HOSTNAME_URL = 'http://localhost:8080'
 ENV KEYCLOAK_ADMIN='admin'
 ENV KEYCLOAK_ADMIN_PASSWORD='d55'
 
-
-# Expose port 8080 for Keycloak
+# Expose port 8080 for keycloak
 EXPOSE 8080
-
-# # Use bitnami/keycloak as base image
-# FROM bitnami/keycloak:latest as builder
-
-# # Set environment variables for database connection
-# ENV externalDatabase.host="jdbc:postgresql://18.135.96.195"
-# ENV KEYCLOAK_DATABASE_HOST="18.135.96.195"
-# ENV externalDatabase.port=5432
-# ENV externalDatabase.database=postgres
-# ENV externalDatabase.user=postgres
-# ENV externalDatabase.password=Skyliner005!\"£
-# ENV HOSTNAME_STRICT=false
-# ENV KEYCLOAK_DATABASE_PORT=5432
-# ENV KEYCLOAK_DATABASE_NAME=postgres
-# ENV KEYCLOAK_DATABASE_USER=postgres
-# ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
-#       # Should create administrator user on boot?
-# ENV KEYCLOAK_CREATE_ADMIN_USER=true
-#       # Administrator default user
-# ENV KEYCLOAK_ADMIN_USER=admin
-#       # Administrator default password
-# ENV KEYCLOAK_ADMIN_PASSWORD=admin
-
-
 
 
 # Use nginx image as the second stage
@@ -69,7 +47,7 @@ FROM nginx:latest AS nginx
 # Copy the keycloak files from the previous stage
 #COPY --from=builder /opt/bitnami/keycloak /opt/bitnami/keycloak
 COPY --from=builder opt/keycloak/ /opt/keycloak/
-
+COPY --from=builder /usr/bin/java /usr/bin/java
 
 # Copy the start script and make it executable
 COPY start.sh /start.sh
