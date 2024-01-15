@@ -21,10 +21,10 @@ EXPOSE 8080
 FROM nginx:latest AS nginx
 
 # Copy the nginx configuration file from the previous stage
-COPY --from=base /opt/bitnami/nginx/conf/server_blocks/keycloak.conf /etc/nginx/conf.d/default.conf
+COPY --from=base /opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the nginx configuration file
-COPY nginx.conf /etc/nginx/nginx.conf
+#COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the keycloak files from the previous stage
 COPY --from=base /opt/bitnami/keycloak /opt/bitnami/keycloak
