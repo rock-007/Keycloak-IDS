@@ -14,7 +14,7 @@ RUN keytool -genkeypair -storepass password -storetype PKCS12 -keyalg RSA -keysi
 RUN /opt/keycloak/bin/kc.sh build
 
 # Copy the keycloak files to the image
-COPY --from=keycloak /opt/keycloak/ /opt/keycloak/
+COPY --from=builder /opt/keycloak/ /opt/keycloak/
 
 # Set the environment variables for keycloak
 # change these values to point to a running postgres instance
