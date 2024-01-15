@@ -51,7 +51,6 @@ FROM ubuntu:latest
 # Update the system and install Java 11
 RUN apt update && apt install -y openjdk-17-jdk
 
-docker pull nginx
 
 RUN apt-get update && apt-get install -y nginx
 
