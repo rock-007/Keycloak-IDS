@@ -50,10 +50,10 @@ COPY nginx.conf /etc/nginx/nginx.conf
 FROM ubuntu:latest
 
 # Update the system and install Java 11
-RUN apt update && apt install -y openjdk-11-jdk
+RUN apt update && apt install -y openjdk-17-jdk
 
 # Set the JAVA_HOME environment variable
-ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 
 # Copy your application jar file to the image
 #COPY target/my-app.jar /opt/my-app.jar
