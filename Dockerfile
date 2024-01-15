@@ -40,7 +40,6 @@ FROM nginx:latest AS nginx
 
 # Copy the nginx configuration file from the previous stage
 # COPY --from=builder --chown=nginx:nginx opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default.conf
-COPY nginx.conf /etc/nginx/nginx.conf
 # Copy the nginx configuration file
 #COPY nginx.conf /etc/nginx/nginx.conf
 
@@ -52,8 +51,14 @@ FROM ubuntu:latest
 # Update the system and install Java 11
 RUN apt update && apt install -y openjdk-17-jdk
 
+docker pull nginx
+
+RUN apt-get update && apt-get install -y nginx
+
+
 # Set the JAVA_HOME environment variable
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
+COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy your application jar file to the image
 #COPY target/my-app.jar /opt/my-app.jar
