@@ -1,4 +1,7 @@
 #!/bin/bash
+
+export JAVA=/usr/bin/java
+
 # Start nginx in the background
 nginx -g 'daemon off;' &
 # Start keycloak in the background
