@@ -13,6 +13,35 @@ ENV KEYCLOAK_DATABASE_PORT=5432
 ENV KEYCLOAK_DATABASE_NAME=postgres
 ENV KEYCLOAK_DATABASE_USER=postgres
 ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
+      # Should create administrator user on boot?
+ENV KEYCLOAK_CREATE_ADMIN_USER=true
+      # Administrator default user
+ENV KEYCLOAK_ADMIN_USER=admin
+      # Administrator default password
+ENV KEYCLOAK_ADMIN_PASSWORD=admin
+      # WildFly default management user
+ENV KEYCLOAK_MANAGEMENT_USER=manager
+      # WildFly default management password
+ENV KEYCLOAK_MANAGEMENT_PASSWORD=manager
+
+# Add TLS files into the container keycloak certificates directory
+WORKDIR /opt/bitnami/keycloak/certs/
+
+# pskey.keystore password is 123456
+ADD ./pskey.keystore .
+
+# hrms.truststore password is 234567
+ADD ./hrms.truststore .
+
+# truststore.jks password is 123456
+ADD ./truststore.jks .
+
+# for demonstration purposes only, please make sure to use proper certificates in production instead
+# Add temporary validity new keys pair in pskey.keystore
+#RUN keytool -genkeypair -storepass 123456 -storetype PKCS12 -keyalg RSA -keysize 2048 -dname "CN=server" -alias server -ext "SAN:c=DNS:localhost,IP:127.0.0.1" -keystore serve
+
+
+
 # Expose port 8080 for Keycloak
 EXPOSE 8080
 
