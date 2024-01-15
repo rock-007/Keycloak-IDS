@@ -65,7 +65,7 @@ CMD ["java", "-jar", "/opt/my-app.jar"]
 
 #COPY --from=nginx opt/nginx/ /opt/nginx/
 #COPY --from=nginx etc/nginx/ /etc/nginx/
-COPY --from=nginx-stage /usr/share/nginx/html /usr/share/nginx/html
+COPY --from=nginx /usr/share/nginx/html /usr/share/nginx/html
 
 
 
