@@ -44,8 +44,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 # Copy the nginx configuration file
 #COPY nginx.conf /etc/nginx/nginx.conf
 
-# Copy the keycloak files from the previous stage
-#COPY --from=builder /opt/bitnami/keycloak /opt/bitnami/keycloak
+
 
 
 FROM ubuntu:latest
@@ -63,7 +62,7 @@ ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
 CMD ["java", "-jar", "/opt/my-app.jar"]
 
 COPY --from=builder opt/keycloak/ /opt/keycloak/
-COPY --from=nginx opt/nginx/ /opt/nginx/
+#COPY --from=nginx opt/nginx/ /opt/nginx/
 #COPY --from=nginx etc/nginx/ /etc/nginx/
 COPY --from=nginx /usr/share/nginx/html /usr/share/nginx/html
 
