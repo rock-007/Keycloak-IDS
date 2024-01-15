@@ -24,8 +24,7 @@ ENV KEYCLOAK_MANAGEMENT_USER=manager
       # WildFly default management password
 ENV KEYCLOAK_MANAGEMENT_PASSWORD=manager
 
-# Add TLS files into the container keycloak certificates directory
-WORKDIR /opt/bitnami/keycloak/certs/
+
 
 
 
