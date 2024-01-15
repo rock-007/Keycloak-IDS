@@ -21,7 +21,7 @@ EXPOSE 8080
 FROM nginx:latest AS nginx
 
 # Copy the nginx configuration file from the previous stage
-COPY --from=builder --chown=nginx:nginx /opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default.conf
+COPY --from=builder --chown=nginx:nginx opt/bitnami/nginx/conf/nginx.conf /etc/nginx/conf.d/default.conf
 
 # Copy the nginx configuration file
 #COPY nginx.conf /etc/nginx/nginx.conf
