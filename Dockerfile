@@ -46,8 +46,28 @@ FROM nginx:latest AS nginx
 
 # Copy the keycloak files from the previous stage
 #COPY --from=builder /opt/bitnami/keycloak /opt/bitnami/keycloak
+
+
+FROM ubuntu:latest
+
+# Update the system and install Java 11
+RUN apt update && apt install -y openjdk-11-jdk
+
+# Set the JAVA_HOME environment variable
+ENV JAVA_HOME /usr/lib/jvm/java-11-openjdk-amd64
+
+# Copy your application jar file to the image
+#COPY target/my-app.jar /opt/my-app.jar
+
+# Define the default command for the container
+CMD ["java", "-jar", "/opt/my-app.jar"]
+
 COPY --from=builder opt/keycloak/ /opt/keycloak/
-COPY --from=builder /usr/bin/java /usr/bin/java
+COPY --from=nginx opt/nginx/ /opt/nginx/
+COPY nginx.conf /etc/nginx/nginx.conf
+
+
+
 
 # Copy the start script and make it executable
 COPY start.sh /start.sh
