@@ -8,7 +8,11 @@ ENV externalDatabase.port=5432
 ENV externalDatabase.database=postgres
 ENV externalDatabase.user=postgres
 ENV externalDatabase.password=Skyliner005!\"£
-
+ENV HOSTNAME_STRICT=false
+ENV KEYCLOAK_DATABASE_PORT=5432
+ENV KEYCLOAK_DATABASE_NAME=postgres
+ENV KEYCLOAK_DATABASE_USER=postgres
+ENV KEYCLOAK_DATABASE_PASSWORD=Skyliner005!\"£
 # Expose port 8080 for Keycloak
 EXPOSE 8080
 
