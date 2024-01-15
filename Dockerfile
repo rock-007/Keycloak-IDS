@@ -1,5 +1,5 @@
 # Use bitnami/keycloak as base image
-FROM bitnami/keycloak:latest
+FROM bitnami/keycloak:latest As base
 
 # Set environment variables for database connection
 ENV externalDatabase.host="jdbc:postgresql://18.135.96.195"
@@ -21,13 +21,13 @@ EXPOSE 8080
 FROM nginx:latest AS nginx
 
 # Copy the nginx configuration file from the previous stage
-COPY --from=keycloak /opt/bitnami/nginx/conf/server_blocks/keycloak.conf /etc/nginx/conf.d/default.conf
+COPY --from=base /opt/bitnami/nginx/conf/server_blocks/keycloak.conf /etc/nginx/conf.d/default.conf
 
 # Copy the nginx configuration file
 COPY nginx.conf /etc/nginx/nginx.conf
 
 # Copy the keycloak files from the previous stage
-COPY --from=keycloak /opt/bitnami/keycloak /opt/bitnami/keycloak
+COPY --from=base /opt/bitnami/keycloak /opt/bitnami/keycloak
 
 # Expose port 80 for nginx
 EXPOSE 80
