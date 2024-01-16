@@ -58,8 +58,7 @@ RUN apt-get update && apt-get install -y nginx
 # Set the JAVA_HOME environment variable
 ENV JAVA_HOME /usr/lib/jvm/java-17-openjdk-amd64
 COPY nginx.conf /etc/nginx/nginx.conf
-# Copy the Nginx config
-COPY default /etc/nginx/sites-available/default
+
 # Copy your application jar file to the image
 #COPY target/my-app.jar /opt/my-app.jar
 
