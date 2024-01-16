@@ -8,7 +8,7 @@
 # export JAVA=/opt/java/jdk-11.0.12/bin/java
 
 # Start nginx in the background
-nginx -g 'daemon off;' &
+/usr/sbin/nginx -g 'daemon off;' &
 # Start keycloak in the background
 /opt/keycloak/bin/kc.sh &
 # Wait for both processes to finish
