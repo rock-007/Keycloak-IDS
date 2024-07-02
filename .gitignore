@@ -1,0 +1,3 @@
+# Ignore certificate and key files
+server.crt.pem
+server.key.pem
